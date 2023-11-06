@@ -6,6 +6,7 @@ export const Pagination = ({ OnChangePage, currentPage }) => {
     <div className=" flex">
       {page.map((pag, indexpage) => (
         <div
+          key={indexpage}
           onClick={() => OnChangePage(indexpage + 1)}
           className={` border-2  mr-3  ${
             currentPage === indexpage + 1

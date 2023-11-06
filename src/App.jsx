@@ -6,7 +6,6 @@ import { Fullphoto } from "./pages/Fullphoto";
 function App() {
   const [fullphoto, setFullPhoto] = useState("");
   const [photos, setPhotos] = useState([]);
-  console.log(fullphoto);
   return (
     <div className=" p-4 xl:p-8">
       <Header />

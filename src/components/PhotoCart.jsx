@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import {
   AiOutlineHeart,
   AiFillHeart,
@@ -91,10 +92,23 @@ export const PhotoCart = ({ photo, title, desc }) => {
           />
         )}
         {isOpenDesc && (
-          <div className=" m-5">
+          <motion.div
+            className=" m-5"
+            initial={{
+              opacity: 0,
+              y: -50,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              default: { duration: 0.5, ease: "easeInOut" },
+            }}
+          >
             <div className=" text-3xl font-bold mb-3">{title}</div>
             <div className=" text-gray-500">{desc}</div>
-          </div>
+          </motion.div>
         )}
       </div>
     </div>

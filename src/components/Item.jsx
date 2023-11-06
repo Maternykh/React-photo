@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { motion } from "framer-motion";
 export const Item = ({ photos, OnClickPhotoFunc, topic }) => {
   const [mainImage, setMainImage] = useState(0);
+  const item = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+    },
+  };
   return (
-    <div className=" p-4 bg-white rounded-lg mb-5">
+    <motion.div className=" p-4 bg-white rounded-lg mb-5" variants={item}>
       <div className=" justify-center flex mb-4">
         {photos.map((ph, index) => {
           if (mainImage === index) {
@@ -41,6 +48,6 @@ export const Item = ({ photos, OnClickPhotoFunc, topic }) => {
       <div className=" text-xl font-bold mt-3 flex flex-col flex-grow">
         {topic}
       </div>
-    </div>
+    </motion.div>
   );
 };

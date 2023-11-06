@@ -1,9 +1,24 @@
 import React from "react";
 import { PhotoCart } from "../components/PhotoCart";
-
+import { motion } from "framer-motion";
 export const Fullphoto = ({ photos, fullphoto }) => {
   return (
-    <div className=" bg-white rounded-2xl">
+    <motion.div
+      className=" bg-white rounded-2xl"
+      initial={{
+        opacity: 0,
+        y: -50,
+        scale: 0,
+      }}
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      transition={{
+        default: { duration: 0.5, ease: "easeInOut" },
+      }}
+    >
       {photos.map((items, index) => (
         <div key={index}>
           {items.photos.map((ph, i) => {
@@ -13,6 +28,6 @@ export const Fullphoto = ({ photos, fullphoto }) => {
           })}
         </div>
       ))}
-    </div>
+    </motion.div>
   );
 };

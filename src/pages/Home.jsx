@@ -4,13 +4,12 @@ import { Categories } from "../components/Categories";
 import Skelet from "../components/Skelet";
 import { Search } from "../components/Search";
 import { Pagination } from "../components/Pagination";
-
+import { motion } from "framer-motion";
 export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
   const [selectedCateg, setSelectedCateg] = useState(0);
   const [isLoading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  console.log(currentPage);
   const category = selectedCateg > 0 ? `category=${selectedCateg}` : "";
   const filteredphoto = photos
     .filter((el) => {
@@ -32,6 +31,18 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
         setLoading(false);
       });
   }, [selectedCateg, currentPage]);
+  const container = {
+    hidden: { opacity: 1, scale: 0 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
   return (
     <>
       <Categories
@@ -45,9 +56,14 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
           OnChangePage={(page) => setCurrentPage(page)}
         />
       </div>
-      <div className=" flex flex-wrap justify-center xl:justify-between">
+      <motion.div
+        className=" flex flex-wrap justify-center xl:justify-between"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
         {isLoading ? skeletons : filteredphoto}
-      </div>
+      </motion.div>
       <div className=" xl:block hidden ">
         <Pagination
           currentPage={currentPage}
