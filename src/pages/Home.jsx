@@ -39,25 +39,21 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
         OnClickCateg={(index) => setSelectedCateg(index)}
       />
       <Search search={search} setSearch={(e) => setSearch(e)} />
-      {selectedCateg === 0 && (
-        <div className=" xl:hidden block mb-5">
-          <Pagination
-            currentPage={currentPage}
-            OnChangePage={(page) => setCurrentPage(page)}
-          />
-        </div>
-      )}
+      <div className=" xl:hidden block mb-5">
+        <Pagination
+          currentPage={currentPage}
+          OnChangePage={(page) => setCurrentPage(page)}
+        />
+      </div>
       <div className=" flex flex-wrap justify-center xl:justify-between">
         {isLoading ? skeletons : filteredphoto}
       </div>
-      {selectedCateg === 0 && (
-        <div className=" xl:block hidden ">
-          <Pagination
-            currentPage={currentPage}
-            OnChangePage={(page) => setCurrentPage(page)}
-          />
-        </div>
-      )}
+      <div className=" xl:block hidden ">
+        <Pagination
+          currentPage={currentPage}
+          OnChangePage={(page) => setCurrentPage(page)}
+        />
+      </div>
     </>
   );
 };
