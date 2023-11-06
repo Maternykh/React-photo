@@ -3,11 +3,14 @@ import { Item } from "../components/Item";
 import { Categories } from "../components/Categories";
 import Skelet from "../components/Skelet";
 import { Search } from "../components/Search";
+import { Pagination } from "../components/Pagination";
 
 export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
   const [selectedCateg, setSelectedCateg] = useState(0);
   const [isLoading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  console.log(currentPage);
   const category = selectedCateg > 0 ? `category=${selectedCateg}` : "";
   const filteredphoto = photos
     .filter((el) => {
@@ -17,16 +20,18 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
       return false;
     })
     .map((el) => <Item {...el} key={el.id} OnClickPhotoFunc={OnClickPhoto} />);
-  const skeletons = [...new Array(6)].map((_, index) => <Skelet key={index} />);
+  const skeletons = [...new Array(3)].map((_, index) => <Skelet key={index} />);
   useEffect(() => {
     setLoading(true);
-    fetch(`https://653f60259e8bd3be29e06d90.mockapi.io/photos?${category}`)
+    fetch(
+      `https://653f60259e8bd3be29e06d90.mockapi.io/photos?page=${currentPage}&limit=3&${category}`
+    )
       .then((res) => res.json())
       .then((arr) => {
         setPhotos(arr);
         setLoading(false);
       });
-  }, [selectedCateg]);
+  }, [selectedCateg, currentPage]);
   return (
     <>
       <Categories
@@ -34,9 +39,25 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
         OnClickCateg={(index) => setSelectedCateg(index)}
       />
       <Search search={search} setSearch={(e) => setSearch(e)} />
+      {selectedCateg === 0 && (
+        <div className=" xl:hidden block mb-5">
+          <Pagination
+            currentPage={currentPage}
+            OnChangePage={(page) => setCurrentPage(page)}
+          />
+        </div>
+      )}
       <div className=" flex flex-wrap justify-center xl:justify-between">
         {isLoading ? skeletons : filteredphoto}
       </div>
+      {selectedCateg === 0 && (
+        <div className=" xl:block hidden ">
+          <Pagination
+            currentPage={currentPage}
+            OnChangePage={(page) => setCurrentPage(page)}
+          />
+        </div>
+      )}
     </>
   );
 };
