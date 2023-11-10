@@ -5,6 +5,7 @@ import Skelet from "../components/Skelet";
 import { Search } from "../components/Search";
 import { Pagination } from "../components/Pagination";
 import { motion } from "framer-motion";
+import { Footer } from "../components/Footer";
 export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
   const [selectedCateg, setSelectedCateg] = useState(0);
   const [isLoading, setLoading] = useState(true);
@@ -70,6 +71,7 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
           OnChangePage={(page) => setCurrentPage(page)}
         />
       </div>
+      <Footer />
     </>
   );
 };

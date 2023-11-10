@@ -1,6 +1,7 @@
-import React from "react";
-
+import React, { useContext } from "react";
+import { ColorTheme } from "../App";
 export const Pagination = ({ OnChangePage, currentPage }) => {
+  const { darkTheme } = useContext(ColorTheme);
   const page = [1, 2, 3];
   return (
     <div className=" flex">
@@ -10,9 +11,15 @@ export const Pagination = ({ OnChangePage, currentPage }) => {
           onClick={() => OnChangePage(indexpage + 1)}
           className={` border-2  mr-3  ${
             currentPage === indexpage + 1
-              ? "bg-black text-white border-black"
+              ? darkTheme
+                ? "bg-gray-500 text-white border-gray-500"
+                : "bg-black text-white border-black"
+              : darkTheme
+              ? "bg-gray-700 hover:bg-gray-500 text-neutral-200 border-gray-700"
               : "bg-white text-black border-white"
-          } w-10 h-10 flex justify-center items-center rounded-xl hover:border-black hover:cursor-pointer`}
+          } w-10 h-10 flex justify-center items-center rounded-xl ${
+            darkTheme ? "hover:border-white" : "hover:border-black"
+          } hover:cursor-pointer`}
         >
           {pag}
         </div>

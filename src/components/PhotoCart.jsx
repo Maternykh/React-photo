@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { motion } from "framer-motion";
 import {
   AiOutlineHeart,
@@ -10,11 +10,13 @@ import {
 } from "react-icons/ai";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { Link } from "react-router-dom";
+import { ColorTheme } from "../App";
 export const PhotoCart = ({ photo, title, desc }) => {
   const [count, setCount] = useState(0);
   const [like, setLike] = useState(false);
   const [dislike, setDisLike] = useState(false);
   const [isOpenDesc, setIsOpenDesc] = useState(false);
+  const { darkTheme } = useContext(ColorTheme);
   const liked = (event) => {
     setLike((current) => !current);
     setDisLike(false);
@@ -30,7 +32,9 @@ export const PhotoCart = ({ photo, title, desc }) => {
   };
   return (
     <div className=" flex flex-wrap justify-center xl:justify-normal">
-      <div className="w-full xl:w-2/3 border-2 border-black rounded-2xl overflow-hidden">
+      <div
+        className={`w-full xl:w-2/3 border-2 border-black rounded-2xl overflow-hidden`}
+      >
         <img src={photo} className=" w-full " />
         <div className=" p-5 flex align-middle justify-between">
           <div className=" flex items-center justify-center">
@@ -48,7 +52,13 @@ export const PhotoCart = ({ photo, title, desc }) => {
             {count === 1 && <div className="">{count}</div>}
           </div>
           <Link to={`/`}>
-            <div className=" bg-white border-4 border-black rounded-xl px-10 text-xl font-bold hover:bg-black hover:text-white">
+            <div
+              className={`${
+                darkTheme
+                  ? "bg-gray-700 border-gray-900 "
+                  : "bg-white border-black hover:bg-black hover:text-white"
+              }   border-4  rounded-xl px-10 text-xl font-bold `}
+            >
               назад
             </div>
           </Link>

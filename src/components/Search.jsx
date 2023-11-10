@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
+import { ColorTheme } from "../App";
 export const Search = ({ search, setSearch }) => {
+  const { darkTheme } = useContext(ColorTheme);
   return (
     <div className=" mb-5">
       <motion.input
@@ -19,7 +21,11 @@ export const Search = ({ search, setSearch }) => {
         onChange={(e) => setSearch(e.target.value)}
         placeholder="Введите тему"
         type="text"
-        className=" p-2 outline-none border-gray-400 border-2 rounded-xl text-lg"
+        className={`${
+          darkTheme
+            ? "bg-gray-700 text-neutral-200"
+            : "border-gray-400 text-black bg-white"
+        } p-2 outline-none  border-2 rounded-xl text-lg`}
       />
     </div>
   );

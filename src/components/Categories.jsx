@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { motion } from "framer-motion";
+import { ColorTheme } from "../App";
 export const Categories = ({ selectedCateg, OnClickCateg }) => {
   const categ = ["Все", "Море", "Горы", "Архитектура", "Города"];
   const container = {
@@ -20,6 +21,7 @@ export const Categories = ({ selectedCateg, OnClickCateg }) => {
       opacity: 1,
     },
   };
+  const { darkTheme } = useContext(ColorTheme);
   return (
     <div className=" flex flex-wrap ">
       <motion.div
@@ -32,7 +34,11 @@ export const Categories = ({ selectedCateg, OnClickCateg }) => {
           <motion.div
             className={` ${
               selectedCateg === index
-                ? "bg-black text-white hover:cursor-auto "
+                ? darkTheme
+                  ? " bg-gray-500 text-white hover:cursor-auto "
+                  : "bg-black text-white hover:cursor-auto"
+                : darkTheme
+                ? " bg-gray-700 hover:bg-gray-500 text-neutral-200"
                 : "bg-white hover:bg-gray-500"
             }  hover:text-white hover:cursor-pointer mr-3 p-3 rounded-xl mb-3`}
             key={index}

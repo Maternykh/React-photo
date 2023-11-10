@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { ColorTheme } from "../App";
 export const Item = ({ photos, OnClickPhotoFunc, topic }) => {
+  const { darkTheme } = useContext(ColorTheme);
   const [mainImage, setMainImage] = useState(0);
   const item = {
     hidden: { y: 20, opacity: 0 },
@@ -11,7 +13,12 @@ export const Item = ({ photos, OnClickPhotoFunc, topic }) => {
     },
   };
   return (
-    <motion.div className=" p-4 bg-white rounded-lg mb-5" variants={item}>
+    <motion.div
+      className={`${
+        darkTheme ? "bg-gray-700 text-white" : "bg-white text-black"
+      } p-4  rounded-lg mb-5`}
+      variants={item}
+    >
       <div className=" justify-center flex mb-4">
         {photos.map((ph, index) => {
           if (mainImage === index) {

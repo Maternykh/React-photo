@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PhotoCart } from "../components/PhotoCart";
 import { motion } from "framer-motion";
+import { ColorTheme } from "../App";
 export const Fullphoto = ({ photos, fullphoto }) => {
+  const { darkTheme } = useContext(ColorTheme);
   return (
     <motion.div
-      className=" bg-white rounded-2xl"
+      className={` ${
+        darkTheme ? " bg-gray-700 text-white" : "bg-white"
+      } rounded-2xl`}
       initial={{
         opacity: 0,
         y: -50,
