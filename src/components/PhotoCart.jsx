@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   AiOutlineHeart,
@@ -10,13 +10,11 @@ import {
 } from "react-icons/ai";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { Link } from "react-router-dom";
-import { ColorTheme } from "../App";
 export const PhotoCart = ({ photo, title, desc }) => {
   const [count, setCount] = useState(0);
   const [like, setLike] = useState(false);
   const [dislike, setDisLike] = useState(false);
   const [isOpenDesc, setIsOpenDesc] = useState(false);
-  const { darkTheme } = useContext(ColorTheme);
   const liked = (event) => {
     setLike((current) => !current);
     setDisLike(false);
@@ -33,9 +31,11 @@ export const PhotoCart = ({ photo, title, desc }) => {
   return (
     <div className=" flex flex-wrap justify-center xl:justify-normal">
       <div
-        className={`w-full xl:w-2/3 border-2 border-black rounded-2xl overflow-hidden`}
+        className={`w-full  xl:w-2/3 border-2 border-black rounded-2xl overflow-hidden`}
       >
-        <img src={photo} className=" w-full " />
+        <Link to={`/`}>
+          <img src={photo} className=" w-full " />
+        </Link>
         <div className=" p-5 flex align-middle justify-between">
           <div className=" flex items-center justify-center">
             {count === 0 ? (
@@ -51,17 +51,19 @@ export const PhotoCart = ({ photo, title, desc }) => {
             )}
             {count === 1 && <div className="">{count}</div>}
           </div>
-          <Link to={`/`}>
-            <div
-              className={`${
-                darkTheme
-                  ? "bg-gray-700 border-gray-900 "
-                  : "bg-white border-black hover:bg-black hover:text-white"
-              }   border-4  rounded-xl px-10 text-xl font-bold `}
-            >
-              назад
-            </div>
-          </Link>
+          <div>
+            {isOpenDesc ? (
+              <IoMdArrowDropup
+                className=" text-5xl hover:cursor-pointer"
+                onClick={() => setIsOpenDesc((current) => !current)}
+              />
+            ) : (
+              <IoMdArrowDropdown
+                className=" text-5xl hover:cursor-pointer"
+                onClick={() => setIsOpenDesc((current) => !current)}
+              />
+            )}
+          </div>
           <div className=" flex items-center justify-center">
             {like ? (
               <AiFillLike
@@ -88,20 +90,8 @@ export const PhotoCart = ({ photo, title, desc }) => {
           </div>
         </div>
       </div>
-      <div className=" w-full xl:w-1/3 flex mt-6 items-center flex-col">
-        <div className=" font-bold text-xl">описание</div>
-        {isOpenDesc ? (
-          <IoMdArrowDropup
-            className=" text-5xl hover:cursor-pointer"
-            onClick={() => setIsOpenDesc((current) => !current)}
-          />
-        ) : (
-          <IoMdArrowDropdown
-            className=" text-5xl hover:cursor-pointer"
-            onClick={() => setIsOpenDesc((current) => !current)}
-          />
-        )}
-        {isOpenDesc && (
+      {isOpenDesc && (
+        <div className=" w-full xl:w-1/3 flex mt-6 items-center flex-col">
           <motion.div
             className=" m-5"
             initial={{
@@ -119,8 +109,8 @@ export const PhotoCart = ({ photo, title, desc }) => {
             <div className=" text-3xl font-bold mb-3">{title}</div>
             <div className=" text-gray-500">{desc}</div>
           </motion.div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

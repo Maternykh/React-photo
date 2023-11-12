@@ -6,11 +6,13 @@ import { Search } from "../components/Search";
 import { Pagination } from "../components/Pagination";
 import { motion } from "framer-motion";
 import { Footer } from "../components/Footer";
+import axios from "axios";
+import { useSelector } from "react-redux";
 export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
-  const [selectedCateg, setSelectedCateg] = useState(0);
+  const selectedCateg = useSelector((state) => state.categ.selectedCateg);
+  const search = useSelector((state) => state.searchvalue.search);
+  const currentPage = useSelector((state) => state.pages.currentPage);
   const [isLoading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const category = selectedCateg > 0 ? `category=${selectedCateg}` : "";
   const filteredphoto = photos
     .filter((el) => {
@@ -23,12 +25,12 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
   const skeletons = [...new Array(3)].map((_, index) => <Skelet key={index} />);
   useEffect(() => {
     setLoading(true);
-    fetch(
-      `https://653f60259e8bd3be29e06d90.mockapi.io/photos?page=${currentPage}&limit=3&${category}`
-    )
-      .then((res) => res.json())
-      .then((arr) => {
-        setPhotos(arr);
+    axios
+      .get(
+        `https://653f60259e8bd3be29e06d90.mockapi.io/photos?page=${currentPage}&limit=3&${category}`
+      )
+      .then((res) => {
+        setPhotos(res.data);
         setLoading(false);
       });
   }, [selectedCateg, currentPage]);
@@ -46,16 +48,10 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
 
   return (
     <>
-      <Categories
-        selectedCateg={selectedCateg}
-        OnClickCateg={(index) => setSelectedCateg(index)}
-      />
-      <Search search={search} setSearch={(e) => setSearch(e)} />
+      <Categories />
+      <Search />
       <div className=" xl:hidden block mb-5">
-        <Pagination
-          currentPage={currentPage}
-          OnChangePage={(page) => setCurrentPage(page)}
-        />
+        <Pagination />
       </div>
       <motion.div
         className=" flex flex-wrap justify-center xl:justify-between"

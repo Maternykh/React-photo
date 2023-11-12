@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React from "react";
 import { PhotoCart } from "../components/PhotoCart";
 import { motion } from "framer-motion";
-import { ColorTheme } from "../App";
+import { useSelector } from "react-redux";
 export const Fullphoto = ({ photos, fullphoto }) => {
-  const { darkTheme } = useContext(ColorTheme);
+  const darkTheme = useSelector((state) => state.theme.dark);
   return (
     <motion.div
       className={` ${

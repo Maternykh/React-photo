@@ -1,8 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ColorTheme } from "../App";
-export const Search = ({ search, setSearch }) => {
-  const { darkTheme } = useContext(ColorTheme);
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "../Redux/Slice/searchSlice";
+export const Search = () => {
+  const darkTheme = useSelector((state) => state.theme.dark);
+  const search = useSelector((state) => state.searchvalue.search);
+  const dispatch = useDispatch();
   return (
     <div className=" mb-5">
       <motion.input
@@ -18,7 +21,7 @@ export const Search = ({ search, setSearch }) => {
           default: { duration: 0.5, ease: "easeInOut" },
         }}
         value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => dispatch(setSearch(e.target.value))}
         placeholder="Введите тему"
         type="text"
         className={`${

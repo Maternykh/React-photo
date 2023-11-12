@@ -1,7 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { ColorTheme } from "../App";
-export const Categories = ({ selectedCateg, OnClickCateg }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setSelectedCateg } from "../Redux/Slice/filterSlice";
+
+export const Categories = () => {
+  const darkTheme = useSelector((state) => state.theme.dark);
+  const selectedCateg = useSelector((state) => state.categ.selectedCateg);
+  const dispatch = useDispatch();
   const categ = ["Все", "Море", "Горы", "Архитектура", "Города"];
   const container = {
     hidden: { opacity: 1, scale: 0 },
@@ -21,7 +26,6 @@ export const Categories = ({ selectedCateg, OnClickCateg }) => {
       opacity: 1,
     },
   };
-  const { darkTheme } = useContext(ColorTheme);
   return (
     <div className=" flex flex-wrap ">
       <motion.div
@@ -42,7 +46,7 @@ export const Categories = ({ selectedCateg, OnClickCateg }) => {
                 : "bg-white hover:bg-gray-500"
             }  hover:text-white hover:cursor-pointer mr-3 p-3 rounded-xl mb-3`}
             key={index}
-            onClick={() => OnClickCateg(index)}
+            onClick={() => dispatch(setSelectedCateg(index))}
             variants={item}
           >
             {cat}

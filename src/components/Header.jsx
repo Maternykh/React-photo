@@ -1,10 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { ColorTheme } from "../App";
 import { BsSun } from "react-icons/bs";
 import { BiSolidMoon } from "react-icons/bi";
+import { useDispatch, useSelector } from "react-redux";
+import { setDarkTheme } from "../Redux/Slice/themeSlice";
 export const Header = () => {
-  const { darkTheme, setDarkTheme } = useContext(ColorTheme);
+  const darkTheme = useSelector((state) => state.theme.dark);
+  const dispatch = useDispatch();
   return (
     <div className=" flex flex-wrap justify-between items-center">
       <Link to={`/`}>
@@ -20,7 +22,7 @@ export const Header = () => {
         className={`${
           darkTheme ? "bg-gray-900 border-white" : "bg-white"
         } mb-5 p-2 hover:cursor-pointer rounded-xl border-slate-600 border-2`}
-        onClick={() => setDarkTheme((current) => !current)}
+        onClick={() => dispatch(setDarkTheme())}
       >
         {darkTheme ? (
           <BiSolidMoon className=" text-2xl text-white" />

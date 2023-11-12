@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
-import { ColorTheme } from "../App";
-export const Pagination = ({ OnChangePage, currentPage }) => {
-  const { darkTheme } = useContext(ColorTheme);
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrentPage } from "../Redux/Slice/pageSlice";
+
+export const Pagination = () => {
+  const darkTheme = useSelector((state) => state.theme.dark);
+  const currentPage = useSelector((state) => state.pages.currentPage);
+  const dispatch = useDispatch();
   const page = [1, 2, 3];
   return (
     <div className=" flex">
       {page.map((pag, indexpage) => (
         <div
           key={indexpage}
-          onClick={() => OnChangePage(indexpage + 1)}
+          onClick={() => dispatch(setCurrentPage(indexpage + 1))}
           className={` border-2  mr-3  ${
             currentPage === indexpage + 1
               ? darkTheme
