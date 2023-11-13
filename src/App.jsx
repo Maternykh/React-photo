@@ -4,11 +4,11 @@ import { Routes, Route } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { Fullphoto } from "./pages/Fullphoto";
 import { useSelector } from "react-redux";
+import { NotFound } from "./pages/NotFound";
 function App() {
   const [fullphoto, setFullPhoto] = useState("");
   const [photos, setPhotos] = useState([]);
   const darkTheme = useSelector((state) => state.themes.dark);
-  console.log(darkTheme);
   return (
     <div
       className={`p-4 xl:p-8  ${
@@ -31,6 +31,7 @@ function App() {
           path={"/fullphot"}
           element={<Fullphoto fullphoto={fullphoto} photos={photos} />}
         ></Route>
+        <Route path={"/a"} element={<NotFound />}></Route>
       </Routes>
     </div>
   );

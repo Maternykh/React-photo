@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { Footer } from "../components/Footer";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
   const { selectedCateg, search, currentPage } = useSelector(
     (state) => state.filter
@@ -65,6 +66,7 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
         <Pagination />
       </div>
       <Footer />
+      <Link to={`/a`}>w</Link>
     </>
   );
 };
