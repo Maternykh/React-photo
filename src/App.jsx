@@ -31,7 +31,7 @@ function App() {
           path={"/fullphot"}
           element={<Fullphoto fullphoto={fullphoto} photos={photos} />}
         ></Route>
-        <Route path={"/a"} element={<NotFound />}></Route>
+        <Route path={"*"} element={<NotFound />}></Route>
       </Routes>
     </div>
   );

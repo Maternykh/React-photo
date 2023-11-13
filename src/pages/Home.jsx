@@ -66,7 +66,6 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
         <Pagination />
       </div>
       <Footer />
-      <Link to={`/a`}>w</Link>
     </>
   );
 };
