@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-
 export const Item = ({ photos, OnClickPhotoFunc, topic }) => {
-  const darkTheme = useSelector((state) => state.theme.dark);
+  const darkTheme = useSelector((state) => state.themes.dark);
   const [mainImage, setMainImage] = useState(0);
   const item = {
     hidden: { y: 20, opacity: 0 },

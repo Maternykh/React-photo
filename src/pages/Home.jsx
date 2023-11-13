@@ -9,9 +9,9 @@ import { Footer } from "../components/Footer";
 import axios from "axios";
 import { useSelector } from "react-redux";
 export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
-  const selectedCateg = useSelector((state) => state.categ.selectedCateg);
-  const search = useSelector((state) => state.searchvalue.search);
-  const currentPage = useSelector((state) => state.pages.currentPage);
+  const { selectedCateg, search, currentPage } = useSelector(
+    (state) => state.filter
+  );
   const [isLoading, setLoading] = useState(true);
   const category = selectedCateg > 0 ? `category=${selectedCateg}` : "";
   const filteredphoto = photos
@@ -62,10 +62,7 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
         {isLoading ? skeletons : filteredphoto}
       </motion.div>
       <div className=" xl:block hidden ">
-        <Pagination
-          currentPage={currentPage}
-          OnChangePage={(page) => setCurrentPage(page)}
-        />
+        <Pagination />
       </div>
       <Footer />
     </>

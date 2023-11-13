@@ -3,7 +3,7 @@ import { PhotoCart } from "../components/PhotoCart";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
 export const Fullphoto = ({ photos, fullphoto }) => {
-  const darkTheme = useSelector((state) => state.theme.dark);
+  const darkTheme = useSelector((state) => state.themes.dark);
   return (
     <motion.div
       className={` ${

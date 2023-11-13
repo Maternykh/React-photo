@@ -7,7 +7,8 @@ import { useSelector } from "react-redux";
 function App() {
   const [fullphoto, setFullPhoto] = useState("");
   const [photos, setPhotos] = useState([]);
-  const darkTheme = useSelector((state) => state.theme.dark);
+  const darkTheme = useSelector((state) => state.themes.dark);
+  console.log(darkTheme);
   return (
     <div
       className={`p-4 xl:p-8  ${

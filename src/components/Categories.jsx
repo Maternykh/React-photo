@@ -2,10 +2,9 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectedCateg } from "../Redux/Slice/filterSlice";
-
 export const Categories = () => {
-  const darkTheme = useSelector((state) => state.theme.dark);
-  const selectedCateg = useSelector((state) => state.categ.selectedCateg);
+  const { selectedCateg } = useSelector((state) => state.filter);
+  const darkTheme = useSelector((state) => state.themes.dark);
   const dispatch = useDispatch();
   const categ = ["Все", "Море", "Горы", "Архитектура", "Города"];
   const container = {

@@ -5,7 +5,7 @@ import { BiSolidMoon } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { setDarkTheme } from "../Redux/Slice/themeSlice";
 export const Header = () => {
-  const darkTheme = useSelector((state) => state.theme.dark);
+  const darkTheme = useSelector((state) => state.themes.dark);
   const dispatch = useDispatch();
   return (
     <div className=" flex flex-wrap justify-between items-center">

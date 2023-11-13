@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "../Redux/Slice/searchSlice";
+import { setSearch } from "../Redux/Slice/filterSlice";
 export const Search = () => {
-  const darkTheme = useSelector((state) => state.theme.dark);
-  const search = useSelector((state) => state.searchvalue.search);
+  const { search } = useSelector((state) => state.filter);
+  const darkTheme = useSelector((state) => state.themes.dark);
   const dispatch = useDispatch();
   return (
     <div className=" mb-5">

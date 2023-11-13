@@ -1,14 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import themeReducer from "./Slice/themeSlice";
 import filterReducer from "./Slice/filterSlice";
-import searchReducer from "./Slice/searchSlice";
-import pageReducer from "./Slice/pageSlice";
-
+import themeReducer from "./Slice/themeSlice";
 export default configureStore({
   reducer: {
-    theme: themeReducer,
-    categ: filterReducer,
-    searchvalue: searchReducer,
-    pages: pageReducer,
+    filter: filterReducer,
+    themes: themeReducer,
   },
 });

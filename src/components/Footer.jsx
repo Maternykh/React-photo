@@ -8,7 +8,7 @@ import {
 } from "react-icons/tb";
 import { useSelector } from "react-redux";
 export const Footer = () => {
-  const darkTheme = useSelector((state) => state.theme.dark);
+  const darkTheme = useSelector((state) => state.themes.dark);
   return (
     <>
       <div className=" mt-5 flex">

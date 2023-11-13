@@ -1,10 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrentPage } from "../Redux/Slice/pageSlice";
-
+import { setCurrentPage } from "../Redux/Slice/filterSlice";
 export const Pagination = () => {
-  const darkTheme = useSelector((state) => state.theme.dark);
-  const currentPage = useSelector((state) => state.pages.currentPage);
+  const { currentPage } = useSelector((state) => state.filter);
+  const darkTheme = useSelector((state) => state.themes.dark);
   const dispatch = useDispatch();
   const page = [1, 2, 3];
   return (
