@@ -1,11 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "../Redux/Slice/filterSlice";
-export const Search = () => {
-  const { search } = useSelector((state) => state.filter);
-  const darkTheme = useSelector((state) => state.themes.dark);
-  const dispatch = useDispatch();
+import { useAppDispatch, useAppSelector } from "../Types";
+import { RootState } from "../Redux/store";
+export const Search: React.FC = () => {
+  const { search } = useAppSelector((state: RootState) => state.filter);
+  const darkTheme = useAppSelector((state: RootState) => state.themes.dark);
+  const dispatch = useAppDispatch();
   return (
     <div className=" mb-5">
       <motion.input

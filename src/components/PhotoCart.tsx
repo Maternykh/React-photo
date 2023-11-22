@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
-  AiOutlineHeart,
-  AiFillHeart,
   AiOutlineLike,
   AiOutlineDislike,
   AiFillLike,
@@ -10,11 +8,11 @@ import {
 } from "react-icons/ai";
 import { IoMdArrowDropdown, IoMdArrowDropup } from "react-icons/io";
 import { Link } from "react-router-dom";
-export const PhotoCart = ({ photo, title, desc }) => {
-  const [count, setCount] = useState(0);
-  const [like, setLike] = useState(false);
-  const [dislike, setDisLike] = useState(false);
-  const [isOpenDesc, setIsOpenDesc] = useState(false);
+import { Photoses } from "../Types";
+export const PhotoCart = ({ photo, title, desc }: Photoses) => {
+  const [like, setLike] = useState<boolean>(false);
+  const [dislike, setDisLike] = useState<boolean>(false);
+  const [isOpenDesc, setIsOpenDesc] = useState<boolean>(false);
   const liked = (event) => {
     setLike((current) => !current);
     setDisLike(false);
@@ -22,11 +20,6 @@ export const PhotoCart = ({ photo, title, desc }) => {
   const disliked = (event) => {
     setLike(false);
     setDisLike((current) => !current);
-  };
-  const counter = (event) => {
-    count === 0
-      ? setCount((count) => count + 1)
-      : setCount((count) => count - 1);
   };
   return (
     <div className=" flex flex-wrap justify-center xl:justify-normal">
@@ -36,20 +29,19 @@ export const PhotoCart = ({ photo, title, desc }) => {
         <Link to={`/`}>
           <img src={photo} className=" w-full " />
         </Link>
-        <div className=" p-5 flex align-middle justify-between">
-          <div className=" flex items-center justify-center">
-            {count === 0 ? (
-              <AiOutlineHeart
-                className=" text-2xl hover:cursor-pointer"
-                onClick={counter}
+        <div className=" p-3 flex items-center justify-between">
+          <div>
+            {like ? (
+              <AiFillLike
+                className=" text-2xl hover:cursor-pointer mr-5"
+                onClick={liked}
               />
             ) : (
-              <AiFillHeart
-                className=" text-2xl mr-2 hover:cursor-pointer"
-                onClick={counter}
+              <AiOutlineLike
+                className=" text-2xl hover:cursor-pointer mr-5"
+                onClick={liked}
               />
             )}
-            {count === 1 && <div className="">{count}</div>}
           </div>
           <div>
             {isOpenDesc ? (
@@ -64,18 +56,7 @@ export const PhotoCart = ({ photo, title, desc }) => {
               />
             )}
           </div>
-          <div className=" flex items-center justify-center">
-            {like ? (
-              <AiFillLike
-                className=" text-2xl hover:cursor-pointer mr-5"
-                onClick={liked}
-              />
-            ) : (
-              <AiOutlineLike
-                className=" text-2xl hover:cursor-pointer mr-5"
-                onClick={liked}
-              />
-            )}
+          <div>
             {dislike ? (
               <AiFillDislike
                 className=" text-2xl hover:cursor-pointer"

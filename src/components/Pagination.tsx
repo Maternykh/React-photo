@@ -1,10 +1,11 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../Redux/Slice/filterSlice";
-export const Pagination = () => {
-  const { currentPage } = useSelector((state) => state.filter);
-  const darkTheme = useSelector((state) => state.themes.dark);
-  const dispatch = useDispatch();
+import { useAppDispatch, useAppSelector } from "../Types";
+import { RootState } from "../Redux/store";
+export const Pagination: React.FC = () => {
+  const { currentPage } = useAppSelector((state: RootState) => state.filter);
+  const darkTheme = useAppSelector((state: RootState) => state.themes.dark);
+  const dispatch = useAppDispatch();
   const page = [1, 2, 3];
   return (
     <div className=" flex">

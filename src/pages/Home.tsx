@@ -1,4 +1,5 @@
-import { React, useEffect, useState } from "react";
+import React from "react";
+import { useEffect, useState } from "react";
 import { Item } from "../components/Item";
 import { Categories } from "../components/Categories";
 import Skelet from "../components/Skelet";
@@ -7,23 +8,28 @@ import { Pagination } from "../components/Pagination";
 import { motion } from "framer-motion";
 import { Footer } from "../components/Footer";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
-  const { selectedCateg, search, currentPage } = useSelector(
-    (state) => state.filter
+import { setPhotos } from "../Redux/Slice/photoSlice";
+import { PhotoMap, useAppDispatch, useAppSelector } from "../Types";
+import { RootState } from "../Redux/store";
+export const Home = () => {
+  const dispatch = useAppDispatch();
+  const photos = useAppSelector((state: RootState) => state.photo.photos);
+  const { selectedCateg, search, currentPage } = useAppSelector(
+    (state: RootState) => state.filter
   );
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const category = selectedCateg > 0 ? `category=${selectedCateg}` : "";
   const filteredphoto = photos
-    .filter((el) => {
+    .filter((el: PhotoMap) => {
       if (el.topic.toLowerCase().includes(search.toLowerCase())) {
         return true;
       }
       return false;
     })
-    .map((el) => <Item {...el} key={el.id} OnClickPhotoFunc={OnClickPhoto} />);
-  const skeletons = [...new Array(3)].map((_, index) => <Skelet key={index} />);
+    .map((el: PhotoMap) => <Item {...el} key={el.id} />);
+  const skeletons = [...new Array(3)].map((_, index: number) => (
+    <Skelet key={index} />
+  ));
   useEffect(() => {
     setLoading(true);
     axios
@@ -31,7 +37,7 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
         `https://653f60259e8bd3be29e06d90.mockapi.io/photos?page=${currentPage}&limit=3&${category}`
       )
       .then((res) => {
-        setPhotos(res.data);
+        dispatch(setPhotos(res.data));
         setLoading(false);
       });
   }, [selectedCateg, currentPage]);
@@ -46,7 +52,6 @@ export const Home = ({ OnClickPhoto, photos, setPhotos }) => {
       },
     },
   };
-
   return (
     <>
       <Categories />

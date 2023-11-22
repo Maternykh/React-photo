@@ -4,7 +4,7 @@ import { BsSun } from "react-icons/bs";
 import { BiSolidMoon } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { setDarkTheme } from "../Redux/Slice/themeSlice";
-export const Header = () => {
+export const Header: React.FC = () => {
   const darkTheme = useSelector((state) => state.themes.dark);
   const dispatch = useDispatch();
   return (
@@ -18,17 +18,19 @@ export const Header = () => {
           Моя коллекция фотографий
         </div>
       </Link>
-      <div
-        className={`${
-          darkTheme ? "bg-gray-900 border-white" : "bg-white"
-        } mb-5 p-2 hover:cursor-pointer rounded-xl border-slate-600 border-2`}
-        onClick={() => dispatch(setDarkTheme())}
-      >
-        {darkTheme ? (
-          <BiSolidMoon className=" text-2xl text-white" />
-        ) : (
-          <BsSun className=" text-2xl" />
-        )}
+      <div className=" flex flex-nowrap">
+        <div
+          className={`${
+            darkTheme ? "bg-gray-900 border-white" : "bg-white"
+          } mb-5 p-2 hover:cursor-pointer rounded-xl border-slate-600 border-2`}
+          onClick={() => dispatch(setDarkTheme())}
+        >
+          {darkTheme ? (
+            <BiSolidMoon className=" text-2xl text-white" />
+          ) : (
+            <BsSun className=" text-2xl" />
+          )}
+        </div>
       </div>
     </div>
   );

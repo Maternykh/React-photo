@@ -1,9 +1,10 @@
 import React from "react";
 import { PhotoCart } from "../components/PhotoCart";
 import { motion } from "framer-motion";
-import { useSelector } from "react-redux";
-export const Fullphoto = ({ photos, fullphoto }) => {
-  const darkTheme = useSelector((state) => state.themes.dark);
+import { PhotoMap, useAppSelector } from "../Types";
+export const Fullphoto = ({ fullphoto }: { fullphoto: string }) => {
+  const photos = useAppSelector((state) => state.photo.photos);
+  const darkTheme = useAppSelector((state) => state.themes.dark);
   return (
     <motion.div
       className={` ${
@@ -23,9 +24,9 @@ export const Fullphoto = ({ photos, fullphoto }) => {
         default: { duration: 0.5, ease: "easeInOut" },
       }}
     >
-      {photos.map((items, index) => (
+      {photos.map((items: PhotoMap, index: number) => (
         <div key={index}>
-          {items.photos.map((ph, i) => {
+          {items.photos.map((ph, i: number) => {
             if (fullphoto === ph.photo) {
               return <PhotoCart {...ph} key={i} />;
             }

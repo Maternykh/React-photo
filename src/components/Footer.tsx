@@ -1,14 +1,14 @@
 import React from "react";
-import { SiReactrouter } from "react-icons/si";
 import {
   TbBrandFramerMotion,
   TbBrandReact,
   TbBrandRedux,
   TbBrandTailwind,
 } from "react-icons/tb";
-import { useSelector } from "react-redux";
-export const Footer = () => {
-  const darkTheme = useSelector((state) => state.themes.dark);
+import { useAppSelector } from "../Types";
+import { RootState } from "../Redux/store";
+export const Footer: React.FC = () => {
+  const darkTheme = useAppSelector((state: RootState) => state.themes.dark);
   return (
     <>
       <div className=" mt-5 flex">
@@ -29,15 +29,6 @@ export const Footer = () => {
           } p-2  rounded-xl mr-3  border-2`}
         >
           <TbBrandRedux className="  text-4xl " />
-        </div>
-        <div
-          className={` ${
-            darkTheme
-              ? " bg-gray-700 border-white text-white"
-              : "bg-white border-slate-600 text-gray-900"
-          } p-2  rounded-xl mr-3  border-2`}
-        >
-          <SiReactrouter className="  text-4xl" />
         </div>
         <div
           className={` ${

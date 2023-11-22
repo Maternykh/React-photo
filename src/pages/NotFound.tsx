@@ -1,8 +1,8 @@
 import React from "react";
-import { useSelector } from "react-redux";
-
+import { useAppSelector } from "../Types";
+import { RootState } from "../Redux/store";
 export const NotFound = () => {
-  const darkTheme = useSelector((state) => state.themes.dark);
+  const darkTheme = useAppSelector((state: RootState) => state.themes.dark);
   return (
     <div className=" p-5 h-5/6">
       <div

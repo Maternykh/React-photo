@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+const dark: boolean = true;
 export const themeSlice = createSlice({
   name: "themes",
   initialState: {
-    dark: true,
+    dark: dark,
   },
   reducers: {
     setDarkTheme: (state) => {
