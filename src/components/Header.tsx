@@ -2,11 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsSun } from "react-icons/bs";
 import { BiSolidMoon } from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
 import { setDarkTheme } from "../Redux/Slice/themeSlice";
+import { useAppDispatch, useAppSelector } from "../Types";
+import { RootState } from "../Redux/store";
 export const Header: React.FC = () => {
-  const darkTheme = useSelector((state) => state.themes.dark);
-  const dispatch = useDispatch();
+  const darkTheme = useAppSelector((state: RootState) => state.themes.dark);
+  const dispatch = useAppDispatch();
   return (
     <div className=" flex flex-wrap justify-between items-center">
       <Link to={`/`}>
